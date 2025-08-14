@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noamic Dynasty History Map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<style>
+  body { margin:0; font-family: 'Segoe UI', sans-serif; }
+  header { background:#2c3e50; color:white; padding:1rem; text-align:center; }
+  #map { height: 90vh; width: 100%; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Noamic Dynasty History Map</h1>
+</header>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  // Initialize map centered roughly on Europe/Middle East
+  var map = L.map('map').setView([40, 30], 3);
+
+  // Add tile layer
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Dynasty events
+  var events = [
+    {name:"Battle of Mycemene", year:"1863 BCE", coords:[37.73, 22.75], desc:"Potomelidus I wins this early battle."},
+    {name:"Bosporus Naval Invasion", year:"1860 BCE", coords:[41.0, 29.0], desc:"Major naval operation by Potomelidus I."},
+    {name:"Capture of Saxons", year:"1862 BCE", coords:[52.0, 10.0], desc:"Northern conquest."},
+    {name:"Capture of Nile", year:"1850 BCE", coords:[30.0, 31.2], desc:"Strategic expansion into Africa."},
+    {name:"Armenia Campaign", year:"1845 BCE", coords:[40.5, 45.0], desc:"Reconquest after defeat."},
+    {name:"Celtic Europe Raid", year:"1825 BCE", coords:[50.0, 5.0], desc:"Potomelidus II raids Western tribes."},
+    {name:"Central Asia Conquest", year:"1824 BCE", coords:[42.0, 70.0], desc:"Empire expands eastward."},
+    {name:"Strike on Canaan", year:"1809 BCE", coords:[32.0, 35.5], desc:"Middle Eastern campaign."}
+  ];
+
+  // Add markers
+  events.forEach(e => {
+    L.marker(e.coords).addTo(map)
+      .bindPopup(`<b>${e.name} (${e.year})</b><br>${e.desc}`);
+  });
+
+</script>
+</body>
+</html>
